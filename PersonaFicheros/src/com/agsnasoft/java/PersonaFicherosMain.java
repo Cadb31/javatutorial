@@ -20,8 +20,8 @@ public class PersonaFicherosMain {
 		personas.add(persona2);
 		
 		PersonaFicherosMain pFicheros = new PersonaFicherosMain();
-		//pFicheros.guardarFichero(personas);
-		//pFicheros.leerFichero();
+		pFicheros.guardarFichero(personas);
+		pFicheros.leerFichero();
 
 	}
 	
