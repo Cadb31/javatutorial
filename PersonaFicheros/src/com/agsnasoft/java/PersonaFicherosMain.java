@@ -1,6 +1,9 @@
 package com.agsnasoft.java;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +20,8 @@ public class PersonaFicherosMain {
 		personas.add(persona2);
 		
 		PersonaFicherosMain pFicheros = new PersonaFicherosMain();
-		pFicheros.guardarFichero(personas);
+		//pFicheros.guardarFichero(personas);
+		//pFicheros.leerFichero();
 
 	}
 	
@@ -30,11 +34,11 @@ public class PersonaFicherosMain {
 			for(Persona persona: personas){
 				if(i == 0){
 					fw.write("Nombre		Apellidos		Dirección		Edad		Email\n");
-					System.out.println("Nombre		Apellidos		Dirección		Edad		Email");
+					//System.out.println("Nombre		Apellidos		Dirección		Edad		Email");
 				}
 				
 				fw.write(persona.getNombre() + "		" + persona.getApellidos() + "		" + persona.getDireccion() + "		" + persona.getEdad() + "		" + persona.getEmail() + "\n");
-				System.out.println(persona.getNombre() + "		" + persona.getApellidos() + "		" + persona.getDireccion() + "		" + persona.getEdad() + "		" + persona.getEmail());
+				//System.out.println(persona.getNombre() + "		" + persona.getApellidos() + "		" + persona.getDireccion() + "		" + persona.getEdad() + "		" + persona.getEmail());
 				i++;
 			}
 			
@@ -45,7 +49,24 @@ public class PersonaFicherosMain {
 	}
 	
 	public void leerFichero(){
-		
+		File fichero = new File("C:\\ws_sts_openlegacy\\Persona.txt");
+		String cadena;
+		try {
+			FileReader fr = new FileReader(fichero);
+			BufferedReader bf = new BufferedReader(fr);
+
+			while((cadena = bf.readLine())!= null){
+				System.out.println(cadena);
+			}
+			
+			bf.close();
+			fr.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
