@@ -1,7 +1,6 @@
 package com.crud.vaadin;
 
 import org.vaadin.spring.events.EventBus;
-import org.vaadin.teemu.switchui.Switch;
 import org.vaadin.viritin.fields.MTextField;
 import org.vaadin.viritin.form.AbstractForm;
 import org.vaadin.viritin.layouts.MFormLayout;
@@ -28,7 +27,7 @@ public class PersonForm extends AbstractForm<Person> {
     TextField email = new MTextField("Email");
     TextField phoneNumber = new MTextField("Phone");
     DateField birthDay = new DateField("Birthday");
-    Switch colleague = new Switch("Colleague");
+    TextField edad = new MTextField("Edad");
 
     PersonForm(PersonRepository r, EventBus.UIEventBus b) {
         this.repo = r;
@@ -54,7 +53,7 @@ public class PersonForm extends AbstractForm<Person> {
                         email,
                         phoneNumber,
                         birthDay,
-                        colleague
+                        edad
                 ).withWidth(""),
                 getToolbar()
         ).withWidth("");

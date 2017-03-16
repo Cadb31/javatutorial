@@ -60,5 +60,14 @@ public class Persona {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public void escribirTipoPersona(String profesion){		
+		System.out.println("Soy una persona de tipo: " + profesion);
+	}
 
+	@Override
+	public String toString() {
+		return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion + ", edad=" + edad
+				+ ", email=" + email + "]";
+	}
 }

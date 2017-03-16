@@ -43,7 +43,7 @@ public class MainUI extends UI {
     
     private TextField filterByName = new MTextField()
             .withInputPrompt("Filter by name");
-    private Button addNew = new MButton(FontAwesome.PLUS, this::add);
+    private Button addNew = new MButton(FontAwesome.USER_PLUS, this::add);
     private Button edit = new MButton(FontAwesome.PENCIL_SQUARE_O, this::edit);
     private Button delete = new ConfirmButton(FontAwesome.TRASH_O,
             "Are you sure you want to delete the entry?", this::remove);

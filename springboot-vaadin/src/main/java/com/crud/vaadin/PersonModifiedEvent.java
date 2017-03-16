@@ -10,6 +10,7 @@ public class PersonModifiedEvent implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private final Person person;
 
     public PersonModifiedEvent(Person p) {
