@@ -8,8 +8,8 @@
 		<version>1.4.2.RELEASE</version>
 	</parent>
 
-	<groupId>com.example</groupId>
-	<artifactId>springboot-vaadin</artifactId>
+	<groupId>com.agsnasoft</groupId>
+	<artifactId>demo-vaadin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<description>Simple CRUD with Vaadin and Spring Data backend</description>
 
@@ -18,7 +18,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<version.vaadin>7.7.3</version.vaadin>
 		<version.vaadin-spring>1.1.0</version.vaadin-spring>
-		<start-class>crud.Application</start-class>
+		<start-class>com.agsnasoft.DemoVaadinApplication</start-class>
 	</properties>
 
 	<dependencies>

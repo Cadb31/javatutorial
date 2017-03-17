@@ -13,9 +13,14 @@
         <version>1.5.2.RELEASE</version>
     </parent>
 
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+	<properties>
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<version.vaadin>7.7.3</version.vaadin>
+		<version.vaadin-spring>1.1.0</version.vaadin-spring>
+		<start-class>com.springboot.rest.client.Application</start-class>
+	</properties>
 
     <dependencies>
         <dependency>

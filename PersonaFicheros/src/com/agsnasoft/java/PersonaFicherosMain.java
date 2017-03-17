@@ -34,12 +34,12 @@ public class PersonaFicherosMain {
 				pFicheros.leerFichero(fichero);
 				break;
 			case 3:
-				//pFicheros.modificarPersona(pFicheros.leerFichero(fichero), fichero);
-				pFicheros.modificarPersonaConsola(pFicheros.leerFichero(fichero), scaner, fichero);
+				pFicheros.modificarPersona(pFicheros.leerFichero(fichero), fichero);
+				//pFicheros.modificarPersonaConsola(pFicheros.leerFichero(fichero), scaner, fichero);
 				break;
 			case 4:
-				//pFicheros.eliminarPersona(pFicheros.leerFichero(fichero), fichero);
-				pFicheros.eliminarPersonaConsola(pFicheros.leerFichero(fichero), scaner, fichero);
+				pFicheros.eliminarPersona(pFicheros.leerFichero(fichero), fichero);
+				//pFicheros.eliminarPersonaConsola(pFicheros.leerFichero(fichero), scaner, fichero);
 				break;
 			}
 		}while(opc != 5);
