@@ -43,8 +43,8 @@ public class PersonaBaseDatosMain {
 				break;
 			case 5:
 				pBaseDatos.consultarPersonas();
-				//pBaseDatos.eliminarPersona();
-				pBaseDatos.eliminarPersonaConsola(scaner);
+				pBaseDatos.eliminarPersona();
+				//pBaseDatos.eliminarPersonaConsola(scaner);
 				break;
 			}
 
