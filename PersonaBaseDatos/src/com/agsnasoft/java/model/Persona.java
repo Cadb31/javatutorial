@@ -2,6 +2,7 @@ package com.agsnasoft.java.model;
 
 public class Persona {
 	
+	private int id;
 	private String nombre;
 	private String apellidos;
 	private String direccion;
@@ -14,6 +15,16 @@ public class Persona {
 
 	public Persona(String nombre, String apellidos, String direccion, Integer edad, String email) {
 		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.direccion = direccion;
+		this.edad = edad;
+		this.email = email;
+	}	
+
+	public Persona(int id, String nombre, String apellidos, String direccion, Integer edad, String email) {
+		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.direccion = direccion;
@@ -61,13 +72,17 @@ public class Persona {
 		this.email = email;
 	}
 	
-	public void escribirTipoPersona(String profesion){		
-		System.out.println("Soy una persona de tipo: " + profesion);
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override
 	public String toString() {
-		return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion + ", edad=" + edad
-				+ ", email=" + email + "]";
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion
+				+ ", edad=" + edad + ", email=" + email + "]";
 	}
 }
