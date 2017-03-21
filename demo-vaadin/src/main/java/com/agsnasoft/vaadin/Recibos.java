@@ -14,6 +14,7 @@ import com.agsnasoft.model.ReciboDao;
 import com.agsnasoft.model.ReciboDaoImpl;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
+import com.vaadin.server.BrowserWindowOpener;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -68,7 +69,7 @@ public class Recibos extends UI {
 	private Label ccc = new Label("CCC:");
 	private Label cccDecription = new Label();
 
-    private Button consultar = new MButton(FontAwesome.SEARCH, "Consultar", this::consultar);    
+    private Button consultar = new MButton(FontAwesome.SEARCH, "Consultar", this::consultar);
     private Button historico = new MButton(FontAwesome.HISTORY, "Historico", this::verHistorico);
     private Button documento = new MButton(FontAwesome.BOOK, "Documento", this::verDocumento);
     private Button incidencia = new MButton(FontAwesome.EXCLAMATION_CIRCLE, "Incidencia", this::verIncidencia);
@@ -126,23 +127,39 @@ public class Recibos extends UI {
 	}
 	
     public void consultar(ClickEvent clickEvent) {
-        
+		BrowserWindowOpener opener = new BrowserWindowOpener(PopupVaadin.class);
+		opener.setFeatures("height=200,width=300,resizable");
+
+    	opener.setWindowName("Consultar");
+    	opener.extend(consultar);
     }
     
     public void verHistorico(ClickEvent e) {
-        
+		BrowserWindowOpener opener = new BrowserWindowOpener(PopupVaadin.class);
+		opener.setFeatures("height=200,width=300,resizable");
+
+    	opener.extend(historico);    	
     }
     
     public void verDocumento(ClickEvent e) {
+		BrowserWindowOpener opener = new BrowserWindowOpener(PopupVaadin.class);
+		opener.setFeatures("height=200,width=300,resizable");
 
+    	opener.extend(documento);
     }
 
     public void verIncidencia(ClickEvent e) {
+		BrowserWindowOpener opener = new BrowserWindowOpener(PopupVaadin.class);
+		opener.setFeatures("height=200,width=300,resizable");
 
+    	opener.extend(incidencia);
     }
     
     public void modificar(ClickEvent e) {
+		BrowserWindowOpener opener = new BrowserWindowOpener(PopupVaadin.class);
+		opener.setFeatures("height=200,width=300,resizable");
 
+    	opener.extend(modificar);
     }
 
     private void loadRecibos(){
