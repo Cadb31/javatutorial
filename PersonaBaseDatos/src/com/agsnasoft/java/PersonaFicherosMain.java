@@ -12,6 +12,8 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import com.agsnasoft.java.model.Persona;
+
 public class PersonaFicherosMain {
 
 	public static void main(String[] args) {
