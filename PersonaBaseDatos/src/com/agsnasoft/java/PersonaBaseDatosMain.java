@@ -120,17 +120,21 @@ public class PersonaBaseDatosMain {
 		Persona p = new Persona();
 		p.setId(id);
 		List<Persona> personas = personaDao.consultarPersona(p);
-		if (personas == null) {
+		if (personas == null || personas.size() == 0) {
 			JOptionPane.showMessageDialog(null, "La persona indicada no existe");
 		} else {
-			System.out.println(personas.toString());
+			for (Persona persona : personas) {
+				System.out.println(persona.toString());
+			}			
 		}
 		return personas;
 	}
 
 	public List<Persona> consultarPersonas() {
 		List<Persona> personas = personaDao.consultarPersonas();
-		System.out.println(personas.toString());
+		for (Persona persona : personas) {
+			System.out.println(persona.toString());
+		}		
 		return personas;
 	}
 
@@ -163,28 +167,28 @@ public class PersonaBaseDatosMain {
 		Persona p = new Persona();
 		p.setId(id);
 		List<Persona> personas = personaDao.consultarPersona(p);
-		if (personas == null) {
+		if (personas == null || personas.size() == 0) {
 			JOptionPane.showMessageDialog(null, "La persona indicada no existe");
-		}
-
-		String nombre = JOptionPane.showInputDialog("Modificar Nombre " + personas.get(0).getNombre() + " ?");
-		String apellidos = JOptionPane.showInputDialog("Modificar Apellidos " + personas.get(0).getApellidos() + " ?");
-		String direccion = JOptionPane.showInputDialog("Modificar Dirección " + personas.get(0).getDireccion() + " ?");
-		Integer edad = 0;
-		boolean isValid = true;
-		do {
-			try {
-				edad = Integer
-						.valueOf(JOptionPane.showInputDialog("Modificar Edad " + personas.get(0).getEdad() + " ?"));
-				isValid = true;
-			} catch (Exception e) {
-				isValid = false;
+		}else{
+			String nombre = JOptionPane.showInputDialog("Modificar Nombre " + personas.get(0).getNombre() + " ?");
+			String apellidos = JOptionPane.showInputDialog("Modificar Apellidos " + personas.get(0).getApellidos() + " ?");
+			String direccion = JOptionPane.showInputDialog("Modificar Dirección " + personas.get(0).getDireccion() + " ?");
+			Integer edad = 0;
+			boolean isValid = true;
+			do {
+				try {
+					edad = Integer
+							.valueOf(JOptionPane.showInputDialog("Modificar Edad " + personas.get(0).getEdad() + " ?"));
+					isValid = true;
+				} catch (Exception e) {
+					isValid = false;
+				}
+			} while (!isValid);
+			String email = JOptionPane.showInputDialog("Modificar Email " + personas.get(0).getEmail() + " ?");
+	
+			if (personaDao.actualizarPersona(personas.get(0), new Persona(nombre, apellidos, direccion, edad, email))) {
+				JOptionPane.showMessageDialog(null, "Se ha modificado la persona correctamente");
 			}
-		} while (!isValid);
-		String email = JOptionPane.showInputDialog("Modificar Email " + personas.get(0).getEmail() + " ?");
-
-		if (personaDao.actualizarPersona(personas.get(0), new Persona(nombre, apellidos, direccion, edad, email))) {
-			JOptionPane.showMessageDialog(null, "Se ha modificado la persona correctamente");
 		}
 	}
 
