@@ -98,7 +98,13 @@ public class PersonaBaseDatosMain {
 		} while (!isValid);
 		String email = JOptionPane.showInputDialog("Insertar Email");
 
-		personaDao.insertarPersona(new Persona(nombre, apellidos, direccion, edad, email));
+		if(nombre.equals("") || apellidos.equals("") || direccion.equals("") || email.equals("")){
+			JOptionPane.showMessageDialog(null, "No se puede insertar un usuario con informacion vacia");
+		}else{
+			personaDao.insertarPersona(new Persona(nombre, apellidos, direccion, edad, email));
+		}
+		
+		
 	}
 
 	public void insertarPersonaConsola(Scanner scaner) {
@@ -142,10 +148,18 @@ public class PersonaBaseDatosMain {
 		int id = Integer.parseInt(JOptionPane.showInputDialog("Indicar la persona a eliminar"));
 		Persona p = new Persona();
 		p.setId(id);
-		if (!personaDao.eliminarPersona(p)) {
+		
+		List<Persona> personas = personaDao.consultarPersona(p);
+		
+		if(personas == null || personas.size() > 0){
+			int opc = JOptionPane.showConfirmDialog(null, "Desaea modificar a la persona: " + personas.get(0).toString(), "Eliminar Persona", JOptionPane.YES_NO_CANCEL_OPTION);
+			if(opc == 0){
+				if (personaDao.eliminarPersona(p)) {
+					JOptionPane.showMessageDialog(null, "Persona eliminada correctamente");
+				}
+			}
+		}else{
 			JOptionPane.showMessageDialog(null, "La persona indicada no existe");
-		} else {
-			JOptionPane.showMessageDialog(null, "Persona eliminada correctamente");
 		}
 	}
 
@@ -170,24 +184,31 @@ public class PersonaBaseDatosMain {
 		if (personas == null || personas.size() == 0) {
 			JOptionPane.showMessageDialog(null, "La persona indicada no existe");
 		}else{
-			String nombre = JOptionPane.showInputDialog("Modificar Nombre " + personas.get(0).getNombre() + " ?");
-			String apellidos = JOptionPane.showInputDialog("Modificar Apellidos " + personas.get(0).getApellidos() + " ?");
-			String direccion = JOptionPane.showInputDialog("Modificar Dirección " + personas.get(0).getDireccion() + " ?");
-			Integer edad = 0;
-			boolean isValid = true;
-			do {
-				try {
-					edad = Integer
-							.valueOf(JOptionPane.showInputDialog("Modificar Edad " + personas.get(0).getEdad() + " ?"));
-					isValid = true;
-				} catch (Exception e) {
-					isValid = false;
-				}
-			} while (!isValid);
-			String email = JOptionPane.showInputDialog("Modificar Email " + personas.get(0).getEmail() + " ?");
-	
-			if (personaDao.actualizarPersona(personas.get(0), new Persona(nombre, apellidos, direccion, edad, email))) {
-				JOptionPane.showMessageDialog(null, "Se ha modificado la persona correctamente");
+			int opc = JOptionPane.showConfirmDialog(null, "Desaea modificar a la persona: " + personas.get(0).toString(),"Modificar Persona:", JOptionPane.YES_NO_CANCEL_OPTION);
+			if(opc == 0){
+				String nombre = JOptionPane.showInputDialog("Modificar Nombre " + personas.get(0).getNombre() + " ?");
+				String apellidos = JOptionPane.showInputDialog("Modificar Apellidos " + personas.get(0).getApellidos() + " ?");
+				String direccion = JOptionPane.showInputDialog("Modificar Dirección " + personas.get(0).getDireccion() + " ?");
+				Integer edad = 0;
+				boolean isValid = true;
+				do {
+					try {
+						edad = Integer
+								.valueOf(JOptionPane.showInputDialog("Modificar Edad " + personas.get(0).getEdad() + " ?"));
+						isValid = true;
+					} catch (Exception e) {
+						isValid = false;
+					}
+				} while (!isValid);
+				String email = JOptionPane.showInputDialog("Modificar Email " + personas.get(0).getEmail() + " ?");
+		
+				if(nombre.equals("") || apellidos.equals("") || direccion.equals("") || email.equals("")){
+					JOptionPane.showMessageDialog(null, "No se puede modificar un usuario con informacion vacia");
+				}else{			
+					if (personaDao.actualizarPersona(personas.get(0), new Persona(nombre, apellidos, direccion, edad, email))) {
+						JOptionPane.showMessageDialog(null, "Se ha modificado la persona correctamente");
+					}
+				}				
 			}
 		}
 	}
