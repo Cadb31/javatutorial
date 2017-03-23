@@ -51,7 +51,7 @@ public class PersonaDaoImpl implements PersonaDao {
 	@Override
 	public boolean actualizarPersona(Persona pActual, Persona pModificada) {
 		boolean isOk = false;		
-		String qEliminar = "UPDATE personas.persona SET nombre = ?, apellidos = ?, direccion = ?, edad = ?, email = ? WHERE nombre=? AND apellidos=? AND direccion=? AND edad=? AND email=?";
+		String qEliminar = "UPDATE personas.persona SET nombre = ?, apellidos = ?, direccion = ?, edad = ?, email = ? WHERE id = ?";
 
 		try {
 			
@@ -62,11 +62,7 @@ public class PersonaDaoImpl implements PersonaDao {
 			ps.setInt(4, pModificada.getEdad());
 			ps.setString(5, pModificada.getEmail());
 
-			ps.setString(6, pActual.getNombre());
-			ps.setString(7, pActual.getApellidos());
-			ps.setString(8, pActual.getDireccion());
-			ps.setInt(9, pActual.getEdad());
-			ps.setString(10, pActual.getEmail());
+			ps.setInt(6, pActual.getId());
 			
 			int r = ps.executeUpdate();
 			ps.close();
