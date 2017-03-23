@@ -102,9 +102,7 @@ public class PersonaBaseDatosMain {
 			JOptionPane.showMessageDialog(null, "No se puede insertar un usuario con informacion vacia");
 		}else{
 			personaDao.insertarPersona(new Persona(nombre, apellidos, direccion, edad, email));
-		}
-		
-		
+		}		
 	}
 
 	public void insertarPersonaConsola(Scanner scaner) {
@@ -118,7 +116,6 @@ public class PersonaBaseDatosMain {
 		} catch (Exception e) {
 			System.err.println("Se ha producido una excepcion: " + e.getLocalizedMessage());
 		}
-
 	}
 
 	public List<Persona> consultarPersona() {
@@ -138,9 +135,12 @@ public class PersonaBaseDatosMain {
 
 	public List<Persona> consultarPersonas() {
 		List<Persona> personas = personaDao.consultarPersonas();
+		String personasList = "";
 		for (Persona persona : personas) {
+			personasList += persona.toString() + "\n";
 			System.out.println(persona.toString());
 		}		
+		//JOptionPane.showMessageDialog(null, "Listado de personas: \n" + personasList, "Consulta de personas", JOptionPane.INFORMATION_MESSAGE, null);
 		return personas;
 	}
 
@@ -152,7 +152,7 @@ public class PersonaBaseDatosMain {
 		List<Persona> personas = personaDao.consultarPersona(p);
 		
 		if(personas == null || personas.size() > 0){
-			int opc = JOptionPane.showConfirmDialog(null, "Desaea modificar a la persona: " + personas.get(0).toString(), "Eliminar Persona", JOptionPane.YES_NO_CANCEL_OPTION);
+			int opc = JOptionPane.showConfirmDialog(null, "Desea eliminar a la persona: \n" + personas.get(0).toString(), "Eliminar Persona", JOptionPane.YES_NO_CANCEL_OPTION);
 			if(opc == 0){
 				if (personaDao.eliminarPersona(p)) {
 					JOptionPane.showMessageDialog(null, "Persona eliminada correctamente");
@@ -184,7 +184,7 @@ public class PersonaBaseDatosMain {
 		if (personas == null || personas.size() == 0) {
 			JOptionPane.showMessageDialog(null, "La persona indicada no existe");
 		}else{
-			int opc = JOptionPane.showConfirmDialog(null, "Desaea modificar a la persona: " + personas.get(0).toString(),"Modificar Persona:", JOptionPane.YES_NO_CANCEL_OPTION);
+			int opc = JOptionPane.showConfirmDialog(null, "Desea modificar a la persona: \n" + personas.get(0).toString(),"Modificar Persona:", JOptionPane.YES_NO_CANCEL_OPTION);
 			if(opc == 0){
 				String nombre = JOptionPane.showInputDialog("Modificar Nombre " + personas.get(0).getNombre() + " ?");
 				String apellidos = JOptionPane.showInputDialog("Modificar Apellidos " + personas.get(0).getApellidos() + " ?");
