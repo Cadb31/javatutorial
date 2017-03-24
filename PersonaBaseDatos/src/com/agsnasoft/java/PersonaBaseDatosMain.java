@@ -135,9 +135,9 @@ public class PersonaBaseDatosMain {
 
 	public List<Persona> consultarPersonas() {
 		List<Persona> personas = personaDao.consultarPersonas();
-		String personasList = "";
+		//String personasList = "";
 		for (Persona persona : personas) {
-			personasList += persona.toString() + "\n";
+			//personasList += persona.toString() + "\n";
 			System.out.println(persona.toString());
 		}		
 		//JOptionPane.showMessageDialog(null, "Listado de personas: \n" + personasList, "Consulta de personas", JOptionPane.INFORMATION_MESSAGE, null);
