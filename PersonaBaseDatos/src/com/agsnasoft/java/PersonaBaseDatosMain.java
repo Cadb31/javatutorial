@@ -24,13 +24,13 @@ public class PersonaBaseDatosMain {
 
 		int opc = 0;
 		do {
-			opc = pBaseDatos.drawMenu();
-			// opc = pFicheros.drawMenuConsola(scaner);
+			//opc = pBaseDatos.drawMenu();
+			opc = pBaseDatos.drawMenuConsola(scaner);
 			switch (opc) {
 
 			case 1:
-				pBaseDatos.insertarPersona();
-				// pFicheros.insertarPersonaConsola(scaner);
+				//pBaseDatos.insertarPersona();
+				pBaseDatos.insertarPersonaConsola(scaner);
 				break;
 			case 2:
 				pBaseDatos.consultarPersona();
@@ -43,8 +43,8 @@ public class PersonaBaseDatosMain {
 				break;
 			case 5:
 				pBaseDatos.consultarPersonas();
-				pBaseDatos.eliminarPersona();
-				//pBaseDatos.eliminarPersonaConsola(scaner);
+				//pBaseDatos.eliminarPersona();
+				pBaseDatos.eliminarPersonaConsola(scaner);
 				break;
 			}
 
@@ -72,8 +72,9 @@ public class PersonaBaseDatosMain {
 	public int drawMenuConsola(Scanner scaner) {
 		int opc = 0;
 		try {
-			System.out.println("Elegir una opcion: \n" + "1) Escribir Fichero\n" + "2) Leer Fichero\n"
-					+ "3) Modificar Registro\n" + "4) Eliminar Registro\n" + "5) Salir\n");
+			System.out.println("Elegir una opcion: \n" + "1) Insertar Persona\n"
+					+ "2) Consultar Persona\n" + "3) Consultar Personas\n" + "4) Modificar Persona\n"
+					+ "5) Eliminar Persona\n" + "6) Salir\n");
 			opc = Integer.valueOf(scaner.nextLine());
 		} catch (Exception e) {
 			System.out.println("Opcion no valida");
