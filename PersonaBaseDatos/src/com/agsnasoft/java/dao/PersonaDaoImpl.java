@@ -25,7 +25,7 @@ public class PersonaDaoImpl implements PersonaDao {
 	@Override
 	public boolean insertarPersona(Persona p) {
 		boolean isOk = false;
-		String qInsert = "INSERT INTO personas.persona (nombre, apellidos, direccion, edad, email) VALUES( ?, ?, ?, ?, ?)";
+		String qInsert = "INSERT INTO persona (nombre, apellidos, direccion, edad, email) VALUES( ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement ps = connection.prepareStatement(qInsert);
 			
@@ -51,7 +51,7 @@ public class PersonaDaoImpl implements PersonaDao {
 	@Override
 	public boolean actualizarPersona(Persona pActual, Persona pModificada) {
 		boolean isOk = false;		
-		String qEliminar = "UPDATE personas.persona SET nombre = ?, apellidos = ?, direccion = ?, edad = ?, email = ? WHERE id = ?";
+		String qEliminar = "UPDATE persona SET nombre = ?, apellidos = ?, direccion = ?, edad = ?, email = ? WHERE id = ?";
 
 		try {
 			
@@ -79,7 +79,7 @@ public class PersonaDaoImpl implements PersonaDao {
 	@Override
 	public boolean eliminarPersona(Persona p) {
 		boolean isOk = false;		
-		String qEliminar = "DELETE FROM personas.persona WHERE id = ?";
+		String qEliminar = "DELETE FROM persona WHERE id = ?";
 
 		try {
 			
@@ -101,7 +101,7 @@ public class PersonaDaoImpl implements PersonaDao {
 	@Override
 	public List<Persona> consultarPersonas() {
 		List<Persona> personas = new ArrayList<Persona>();
-		String qSelect = "SELECT id, nombre, apellidos, direccion, edad, email FROM personas.persona";
+		String qSelect = "SELECT id, nombre, apellidos, direccion, edad, email FROM persona";
 
 		try {
 			PreparedStatement ps = connection.prepareStatement(qSelect);
@@ -124,7 +124,7 @@ public class PersonaDaoImpl implements PersonaDao {
 	public List<Persona> consultarPersona(Persona p) {
 	
 		List<Persona> personas = new ArrayList<Persona>();
-		String qSelect = "SELECT id, nombre, apellidos, direccion, edad, email FROM personas.persona WHERE id = ?";
+		String qSelect = "SELECT id, nombre, apellidos, direccion, edad, email FROM persona WHERE id = ?";
 
 		try {
 			PreparedStatement ps = connection.prepareStatement(qSelect);

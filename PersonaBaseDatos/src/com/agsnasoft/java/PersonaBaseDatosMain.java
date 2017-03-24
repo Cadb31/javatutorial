@@ -19,7 +19,7 @@ public class PersonaBaseDatosMain {
 
 	public static void main(String[] args) {
 
-		PersonaBaseDatosMain pBaseDatos = new PersonaBaseDatosMain("jdbc:mysql://localhost:3306", "root", "root");
+		PersonaBaseDatosMain pBaseDatos = new PersonaBaseDatosMain("jdbc:mysql://localhost:3306/personas", "root", "root");
 		Scanner scaner = new Scanner(System.in);
 
 		int opc = 0;
