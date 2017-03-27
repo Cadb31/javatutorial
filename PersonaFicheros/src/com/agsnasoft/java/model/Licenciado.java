@@ -1,4 +1,4 @@
-package com.agsnasoft.java;
+package com.agsnasoft.java.model;
 
 public class Licenciado extends Persona {
 
