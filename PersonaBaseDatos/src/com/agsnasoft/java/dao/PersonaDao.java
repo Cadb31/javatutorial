@@ -14,6 +14,6 @@ public interface PersonaDao {
 	
 	public List<Persona> consultarPersonas();
 	
-	public List<Persona> consultarPersona(Persona p);
+	public Persona consultarPersona(Persona p);
 
 }

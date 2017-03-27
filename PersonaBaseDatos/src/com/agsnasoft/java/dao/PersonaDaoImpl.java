@@ -121,9 +121,9 @@ public class PersonaDaoImpl implements PersonaDao {
 	}
 
 	@Override
-	public List<Persona> consultarPersona(Persona p) {
+	public Persona consultarPersona(Persona p) {
 	
-		List<Persona> personas = new ArrayList<Persona>();
+		Persona persona = null;
 		String qSelect = "SELECT id, nombre, apellidos, direccion, edad, email FROM persona WHERE id = ?";
 
 		try {
@@ -134,7 +134,7 @@ public class PersonaDaoImpl implements PersonaDao {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()){
-				personas.add(new Persona(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6)));
+				persona  = new Persona(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6));
 			}
 			ps.close();
 			rs.close();
@@ -142,7 +142,7 @@ public class PersonaDaoImpl implements PersonaDao {
 			e.printStackTrace();
 		}
 
-		return personas;
+		return persona;
 	}
 
 }

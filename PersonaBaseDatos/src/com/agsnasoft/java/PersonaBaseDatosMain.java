@@ -39,7 +39,8 @@ public class PersonaBaseDatosMain {
 				pBaseDatos.consultarPersonas();
 				break;
 			case 4:
-				pBaseDatos.modificarPersona();
+				//pBaseDatos.modificarPersona();
+				pBaseDatos.modificarPersonaConsola(scaner);
 				break;
 			case 5:
 				pBaseDatos.consultarPersonas();
@@ -109,53 +110,49 @@ public class PersonaBaseDatosMain {
 	public void insertarPersonaConsola(Scanner scaner) {
 
 		System.out.println("Por favor insertar los datos de una persona separados por , por ejemplo: ");
-		System.out.println("Juan,Sanchez,Direccion N1,40,j.sanchez@email.com");
+		System.out.println("Juan,Sanchez,Direccion N1,40,j.sanchez@email.com \n");
 		try {
 			String pLine = scaner.nextLine();
-			String[] linea = pLine.split(",");
-			personaDao.insertarPersona(new Persona(linea[0], linea[1], linea[2], Integer.valueOf(linea[3]), linea[4]));
+			String[] linea = pLine.split(",");			
+			if(linea[0].equals("") || linea[1].equals("") || linea[2].equals("") || linea[3].equals("")){
+				System.err.println("No se puede insertar un usuario con informacion vacia");
+			}else{
+				personaDao.insertarPersona(new Persona(linea[0], linea[1], linea[2], Integer.valueOf(linea[3]), linea[4]));
+			}
 		} catch (Exception e) {
 			System.err.println("Se ha producido una excepcion: " + e.getLocalizedMessage());
 		}
 	}
 
-	public List<Persona> consultarPersona() {
+	public Persona consultarPersona() {
 		int id = Integer.parseInt(JOptionPane.showInputDialog("Indicar la persona a consultar"));
 		Persona p = new Persona();
 		p.setId(id);
-		List<Persona> personas = personaDao.consultarPersona(p);
-		if (personas == null || personas.size() == 0) {
+		Persona persona = personaDao.consultarPersona(new Persona(id, "", "", "", 0, ""));
+		if (persona == null) {
 			JOptionPane.showMessageDialog(null, "La persona indicada no existe");
 		} else {
-			for (Persona persona : personas) {
 				System.out.println(persona.toString());
-			}			
 		}
-		return personas;
+		return persona;
 	}
 
 	public List<Persona> consultarPersonas() {
 		List<Persona> personas = personaDao.consultarPersonas();
-		//String personasList = "";
 		for (Persona persona : personas) {
-			//personasList += persona.toString() + "\n";
 			System.out.println(persona.toString());
 		}		
-		//JOptionPane.showMessageDialog(null, "Listado de personas: \n" + personasList, "Consulta de personas", JOptionPane.INFORMATION_MESSAGE, null);
 		return personas;
 	}
 
 	public void eliminarPersona() {
 		int id = Integer.parseInt(JOptionPane.showInputDialog("Indicar la persona a eliminar"));
-		Persona p = new Persona();
-		p.setId(id);
+		Persona persona = personaDao.consultarPersona(new Persona(id, "", "", "", 0, ""));
 		
-		List<Persona> personas = personaDao.consultarPersona(p);
-		
-		if(personas == null || personas.size() > 0){
-			int opc = JOptionPane.showConfirmDialog(null, "Desea eliminar a la persona: \n" + personas.get(0).toString(), "Eliminar Persona", JOptionPane.YES_NO_CANCEL_OPTION);
+		if(persona != null){
+			int opc = JOptionPane.showConfirmDialog(null, "Desea eliminar a la persona: \n" + persona.toString(), "Eliminar Persona", JOptionPane.YES_NO_CANCEL_OPTION);
 			if(opc == 0){
-				if (personaDao.eliminarPersona(p)) {
+				if (personaDao.eliminarPersona(persona)) {
 					JOptionPane.showMessageDialog(null, "Persona eliminada correctamente");
 				}
 			}
@@ -165,11 +162,10 @@ public class PersonaBaseDatosMain {
 	}
 
 	public void eliminarPersonaConsola(Scanner scaner) {
-		System.out.println("Indicar la persona a eliminar: ");
+		System.out.println("Indicar la persona a eliminar: \n");
 		String pLine = scaner.nextLine();
-		Persona p = new Persona();
-		p.setId(Integer.valueOf(pLine));
-		if (!personaDao.eliminarPersona(p)) {
+
+		if (!personaDao.eliminarPersona(new Persona(Integer.valueOf(pLine), "", "", "", 0, ""))) {
 			System.out.println("La persona indicada no existe");
 		} else {
 			System.out.println("Persona eliminada correctamente");
@@ -179,34 +175,32 @@ public class PersonaBaseDatosMain {
 	public void modificarPersona() {
 
 		int id = Integer.parseInt(JOptionPane.showInputDialog("Indicar la persona a modificar"));
-		Persona p = new Persona();
-		p.setId(id);
-		List<Persona> personas = personaDao.consultarPersona(p);
-		if (personas == null || personas.size() == 0) {
+		Persona persona = personaDao.consultarPersona(new Persona(id, "", "", "", 0, ""));
+		if (persona == null) {
 			JOptionPane.showMessageDialog(null, "La persona indicada no existe");
 		}else{
-			int opc = JOptionPane.showConfirmDialog(null, "Desea modificar a la persona: \n" + personas.get(0).toString(),"Modificar Persona:", JOptionPane.YES_NO_CANCEL_OPTION);
+			int opc = JOptionPane.showConfirmDialog(null, "Desea modificar a la persona: \n" + persona.toString(),"Modificar Persona:", JOptionPane.YES_NO_CANCEL_OPTION);
 			if(opc == 0){
-				String nombre = JOptionPane.showInputDialog("Modificar Nombre " + personas.get(0).getNombre() + " ?");
-				String apellidos = JOptionPane.showInputDialog("Modificar Apellidos " + personas.get(0).getApellidos() + " ?");
-				String direccion = JOptionPane.showInputDialog("Modificar Dirección " + personas.get(0).getDireccion() + " ?");
+				String nombre = JOptionPane.showInputDialog("Modificar Nombre " + persona.getNombre() + " ?");
+				String apellidos = JOptionPane.showInputDialog("Modificar Apellidos " + persona.getApellidos() + " ?");
+				String direccion = JOptionPane.showInputDialog("Modificar Dirección " + persona.getDireccion() + " ?");
 				Integer edad = 0;
 				boolean isValid = true;
 				do {
 					try {
 						edad = Integer
-								.valueOf(JOptionPane.showInputDialog("Modificar Edad " + personas.get(0).getEdad() + " ?"));
+								.valueOf(JOptionPane.showInputDialog("Modificar Edad " + persona.getEdad() + " ?"));
 						isValid = true;
 					} catch (Exception e) {
 						isValid = false;
 					}
 				} while (!isValid);
-				String email = JOptionPane.showInputDialog("Modificar Email " + personas.get(0).getEmail() + " ?");
+				String email = JOptionPane.showInputDialog("Modificar Email " + persona.getEmail() + " ?");
 		
 				if(nombre.equals("") || apellidos.equals("") || direccion.equals("") || email.equals("")){
 					JOptionPane.showMessageDialog(null, "No se puede modificar un usuario con informacion vacia");
 				}else{			
-					if (personaDao.actualizarPersona(personas.get(0), new Persona(nombre, apellidos, direccion, edad, email))) {
+					if (personaDao.actualizarPersona(persona, new Persona(nombre, apellidos, direccion, edad, email))) {
 						JOptionPane.showMessageDialog(null, "Se ha modificado la persona correctamente");
 					}
 				}				
@@ -215,16 +209,24 @@ public class PersonaBaseDatosMain {
 	}
 
 	public void modificarPersonaConsola(Scanner scaner) {
-
-		System.out.println("Por favor insertar los datos de la persona a modificar separados por , ");
 		try {
-			String pLine = scaner.nextLine();
-			Persona p = new Persona();
-			p.setId(Integer.valueOf(pLine));
-			List<Persona> personas = personaDao.consultarPersona(p);			
-			String[] linea = pLine.split(",");
-			if (personaDao.actualizarPersona(personas.get(0), new Persona(linea[0], linea[1], linea[2], Integer.valueOf(linea[3]), linea[4]))) {
-				System.out.println("Se ha modificado la persona correctamente");
+			System.out.println("Indicar la persona a modificar: \n");	
+			String pLine = scaner.nextLine();			
+			Persona persona = personaDao.consultarPersona(new Persona(Integer.valueOf(pLine), "", "", "", 0, ""));
+			if(persona != null){
+				System.out.println("Desea modificar a la persona: \n" + persona.toString());
+				System.out.println("Por favor insertar los datos de la persona a modificar separados por , ");				
+				pLine = scaner.nextLine();
+				String[] linea = pLine.split(",");
+				if(linea[0].equals("") || linea[1].equals("") || linea[2].equals("") || linea[3].equals("")){
+					System.err.println("No se puede insertar un usuario con informacion vacia");
+				}else{
+					if (personaDao.actualizarPersona(persona, new Persona(linea[0], linea[1], linea[2], Integer.valueOf(linea[3]), linea[4]))) {
+						System.out.println("Se ha modificado la persona correctamente");
+					}			
+				}
+			}else{
+				System.out.println("La persona indicada no existe");
 			}
 		} catch (Exception e) {
 			System.err.println("Se ha producido una excepcion: " + e.getLocalizedMessage());
