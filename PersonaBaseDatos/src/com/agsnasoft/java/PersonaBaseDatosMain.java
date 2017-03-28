@@ -24,13 +24,13 @@ public class PersonaBaseDatosMain {
 
 		int opc = 0;
 		do {
-			//opc = pBaseDatos.drawMenu();
-			opc = pBaseDatos.drawMenuConsola(scaner);
+			opc = pBaseDatos.drawMenu();
+			//opc = pBaseDatos.drawMenuConsola(scaner);
 			switch (opc) {
 
 			case 1:
-				//pBaseDatos.insertarPersona();
-				pBaseDatos.insertarPersonaConsola(scaner);
+				pBaseDatos.insertarPersona();
+				//pBaseDatos.insertarPersonaConsola(scaner);
 				break;
 			case 2:
 				pBaseDatos.consultarPersona();
@@ -39,13 +39,13 @@ public class PersonaBaseDatosMain {
 				pBaseDatos.consultarPersonas();
 				break;
 			case 4:
-				//pBaseDatos.modificarPersona();
-				pBaseDatos.modificarPersonaConsola(scaner);
+				pBaseDatos.modificarPersona();
+				//pBaseDatos.modificarPersonaConsola(scaner);
 				break;
-			case 5:
-				pBaseDatos.consultarPersonas();
-				//pBaseDatos.eliminarPersona();
-				pBaseDatos.eliminarPersonaConsola(scaner);
+			case 5:				
+				pBaseDatos.eliminarPersona();
+				//pBaseDatos.consultarPersonas();
+				//pBaseDatos.eliminarPersonaConsola(scaner);
 				break;
 			}
 

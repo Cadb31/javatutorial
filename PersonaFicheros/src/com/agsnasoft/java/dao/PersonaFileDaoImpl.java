@@ -11,28 +11,31 @@ import java.util.List;
 
 import com.agsnasoft.java.model.Persona;
 
-public class PersonaDaoImpl implements PersonaDao{
+public class PersonaFileDaoImpl implements PersonaFileDao{
 	
 	private File fichero;
 	
-	public PersonaDaoImpl() {
+	public PersonaFileDaoImpl() {
 		
 	}
 
-	public PersonaDaoImpl(File fichero) {
+	public PersonaFileDaoImpl(File fichero) {
 		super();
 		this.fichero = fichero;
 	}
 
 	@Override
 	public boolean insertarPersona(Persona person) {
+		boolean isOk = false;
 		try {
 			personas.add(person);
 			escribirFichero();
+			isOk = true;
 		} catch (Exception e) {
+			isOk = false;
 			e.printStackTrace();
 		}
-		return false;
+		return isOk;
 	}
 
 	@Override

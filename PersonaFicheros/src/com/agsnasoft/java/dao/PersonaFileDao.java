@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.agsnasoft.java.model.Persona;
 
-public interface PersonaDao {
+public interface PersonaFileDao {
 	
 	public static List<Persona> personas = new ArrayList<Persona>();
 	

@@ -6,32 +6,32 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import com.agsnasoft.java.dao.PersonaDao;
-import com.agsnasoft.java.dao.PersonaDaoImpl;
+import com.agsnasoft.java.dao.PersonaFileDao;
+import com.agsnasoft.java.dao.PersonaFileDaoImpl;
 import com.agsnasoft.java.model.Persona;
 
 public class PersonaFicherosMain {
 	
-	private PersonaDao personaDao;
+	private PersonaFileDao personaDao;
 
-	public PersonaFicherosMain(PersonaDao personaDao){
+	public PersonaFicherosMain(PersonaFileDao personaDao){
 		this.personaDao = personaDao;
 		personaDao.consultarPersonas();
 	}	
 	
 	public static void main(String[] args) {
 		File fichero = new File("C:\\ws_sts_openlegacy\\Persona.txt");
-		PersonaDao personaDao = new PersonaDaoImpl(fichero);		
+		PersonaFileDao personaDao = new PersonaFileDaoImpl(fichero);		
 		PersonaFicherosMain pFicheros = new PersonaFicherosMain(personaDao);
 		Scanner scaner = new Scanner(System.in);
 		int opc = 0;
 		do{
-			//opc = pFicheros.drawMenu();
-			opc = pFicheros.drawMenuConsola(scaner);
+			opc = pFicheros.drawMenu();
+			//opc = pFicheros.drawMenuConsola(scaner);
 			switch (opc) {
 			case 1:
-				//pFicheros.insertarPersona();
-				pFicheros.insertarPersonaConsola(scaner);
+				pFicheros.insertarPersona();
+				//pFicheros.insertarPersonaConsola(scaner);
 				break;
 			case 2:
 				pFicheros.consultarPersona();
@@ -40,12 +40,12 @@ public class PersonaFicherosMain {
 				pFicheros.consultarPersonas();				
 				break;
 			case 4:
-				//pFicheros.modificarPersona();
-				pFicheros.modificarPersonaConsola(scaner);
+				pFicheros.modificarPersona();
+				//pFicheros.modificarPersonaConsola(scaner);
 				break;
 			case 5:
-				//pFicheros.eliminarPersona();
-				pFicheros.eliminarPersonaConsola(scaner);
+				pFicheros.eliminarPersona();
+				//pFicheros.eliminarPersonaConsola(scaner);
 				break;
 			}
 		}while(opc != 6);
@@ -110,7 +110,7 @@ public class PersonaFicherosMain {
 		if(nombre.equals("") || apellidos.equals("") || direccion.equals("") || email.equals("")){
 			JOptionPane.showMessageDialog(null, "No se puede insertar un usuario con informacion vacia");
 		}else{
-			personaDao.insertarPersona(new Persona(PersonaDao.personas.size() + 1, nombre, apellidos, direccion, edad, email));
+			personaDao.insertarPersona(new Persona(PersonaFileDao.personas.size() + 1, nombre, apellidos, direccion, edad, email));
 		}		
 	}
 
@@ -121,7 +121,7 @@ public class PersonaFicherosMain {
 		try {
 			String pLine = scaner.nextLine();
 			String[] linea = pLine.split(",");
-			personaDao.insertarPersona(new Persona(PersonaDao.personas.size() + 1, linea[0], linea[1], linea[2], Integer.valueOf(linea[3]), linea[4]));
+			personaDao.insertarPersona(new Persona(PersonaFileDao.personas.size() + 1, linea[0], linea[1], linea[2], Integer.valueOf(linea[3]), linea[4]));
 		} catch (Exception e) {
 			System.err.println("Se ha producido una excepcion: " + e.getLocalizedMessage());
 		}

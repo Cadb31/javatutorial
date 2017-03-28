@@ -5,14 +5,16 @@
  */
 package com.agsnasoft.java;
 
+import java.io.File;
 import java.util.List;
-
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 import com.agsnasoft.java.dao.PersonaDao;
 import com.agsnasoft.java.dao.PersonaDaoImpl;
+import com.agsnasoft.java.dao.PersonaFileDao;
+import com.agsnasoft.java.dao.PersonaFileDaoImpl;
 import com.agsnasoft.java.model.Persona;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class MainPersonaGUI extends javax.swing.JFrame {
 
@@ -32,6 +34,7 @@ public class MainPersonaGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
+        personaDao = new PersonaDaoImpl("jdbc:mysql://localhost:3306/personas", "root", "root");
         jFramePersona = new javax.swing.JFrame();
         jScrollPaneTable = new javax.swing.JScrollPane();
         jTablePersona = new javax.swing.JTable();
@@ -58,21 +61,76 @@ public class MainPersonaGUI extends javax.swing.JFrame {
         jButtonAceptar = new javax.swing.JButton();
         jButtonLimpiar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jDialogModificar = new javax.swing.JDialog();
+        jLabelNombreM = new javax.swing.JLabel();
+        jTextFieldNombreM = new javax.swing.JTextField();
+        jLabelApellidosM = new javax.swing.JLabel();
+        jTextFieldApellidosM = new javax.swing.JTextField();
+        jTextFieldDireccionM = new javax.swing.JTextField();
+        jLabelDireccionM = new javax.swing.JLabel();
+        jTextFieldEdadM = new javax.swing.JTextField();
+        jLabelEdadM = new javax.swing.JLabel();
+        jTextFieldEmailM = new javax.swing.JTextField();
+        jLabelEmailM = new javax.swing.JLabel();
+        jButtonAceptarM = new javax.swing.JButton();
+        jButtonLimpiarM = new javax.swing.JButton();
+        jButtonCancelarM = new javax.swing.JButton();
+        File fichero = new File("C:\\ws_sts_openlegacy\\Persona.txt");
+        personaFileDao = new PersonaFileDaoImpl(fichero);
+        jFramePersonaFile = new javax.swing.JFrame();
+        jScrollPaneTableFile = new javax.swing.JScrollPane();
+        jTablePersonaFile = new javax.swing.JTable();
+        jMenuBarPersonaFile = new javax.swing.JMenuBar();
+        jMenuFilePersonaFile = new javax.swing.JMenu();
+        jMenuItemInsertarFile = new javax.swing.JMenuItem();
+        jMenuItemConsultarFile = new javax.swing.JMenuItem();
+        jMenuItemConsultarTodosFile = new javax.swing.JMenuItem();
+        jMenuItemModificarFile = new javax.swing.JMenuItem();
+        jMenuItemEliminarFile = new javax.swing.JMenuItem();
+        jSeparatorExitFile = new javax.swing.JPopupMenu.Separator();
+        jMenuItemSalirFile = new javax.swing.JMenuItem();
+        jDialogInsertarFile = new javax.swing.JDialog();
+        jLabelNombreFile = new javax.swing.JLabel();
+        jTextFieldNombreFile = new javax.swing.JTextField();
+        jLabelApellidosFile = new javax.swing.JLabel();
+        jTextFieldApellidosFile = new javax.swing.JTextField();
+        jTextFieldDireccionFile = new javax.swing.JTextField();
+        jLabelDireccionFile = new javax.swing.JLabel();
+        jTextFieldEdadFile = new javax.swing.JTextField();
+        jLabelEdadFile = new javax.swing.JLabel();
+        jTextFieldEmailFile = new javax.swing.JTextField();
+        jLabelEmailFile = new javax.swing.JLabel();
+        jButtonAceptarFile = new javax.swing.JButton();
+        jButtonLimpiarFile = new javax.swing.JButton();
+        jButtonCancelarFile = new javax.swing.JButton();
+        jDialogModificarFile = new javax.swing.JDialog();
+        jLabelNombreMFile = new javax.swing.JLabel();
+        jTextFieldNombreMFile = new javax.swing.JTextField();
+        jLabelApellidosMFile = new javax.swing.JLabel();
+        jTextFieldApellidosMFile = new javax.swing.JTextField();
+        jTextFieldDireccionMFile = new javax.swing.JTextField();
+        jLabelDireccionMFile = new javax.swing.JLabel();
+        jTextFieldEdadMFile = new javax.swing.JTextField();
+        jLabelEdadMFile = new javax.swing.JLabel();
+        jTextFieldEmailMFile = new javax.swing.JTextField();
+        jLabelEmailMFile = new javax.swing.JLabel();
+        jButtonAceptarMFile = new javax.swing.JButton();
+        jButtonLimpiarMFile = new javax.swing.JButton();
+        jButtonCancelarMFile = new javax.swing.JButton();
         jMenuBarMain = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemFile = new javax.swing.JMenuItem();
         jMenuItemBD = new javax.swing.JMenuItem();
         jMenuItemClose = new javax.swing.JMenuItem();
 
-        jFramePersona.setTitle("Personas");
+        jFramePersona.setTitle("Personas Base Datos");
+        jFramePersona.setLocation(new java.awt.Point(350, 180));
+        jFramePersona.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 
         jTablePersona.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTablePersona.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id", "Nombre", "Apellidos", "Dirección", "Edad", "Email"
@@ -170,6 +228,7 @@ public class MainPersonaGUI extends javax.swing.JFrame {
         );
 
         jDialogInsertar.setTitle("Insertar Persona");
+        jDialogInsertar.setLocation(new java.awt.Point(500, 200));
 
         jLabelNombre.setText("Nombre:");
 
@@ -182,6 +241,11 @@ public class MainPersonaGUI extends javax.swing.JFrame {
         jLabelEmail.setText("Email:");
 
         jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarActionPerformed(evt);
+            }
+        });
 
         jButtonLimpiar.setText("Limpiar");
         jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -266,8 +330,421 @@ public class MainPersonaGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jDialogModificar.setTitle("Modificar Persona");
+        jDialogModificar.setLocation(new java.awt.Point(500, 200));
+
+        jLabelNombreM.setText("Nombre:");
+
+        jLabelApellidosM.setText("Apellidos:");
+
+        jLabelDireccionM.setText("Dirección:");
+
+        jLabelEdadM.setText("Edad:");
+
+        jLabelEmailM.setText("Email:");
+
+        jButtonAceptarM.setText("Aceptar");
+        jButtonAceptarM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarMActionPerformed(evt);
+            }
+        });
+
+        jButtonLimpiarM.setText("Limpiar");
+        jButtonLimpiarM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarMActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelarM.setText("Cancelar");
+        jButtonCancelarM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarMActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogModificarLayout = new javax.swing.GroupLayout(jDialogModificar.getContentPane());
+        jDialogModificar.getContentPane().setLayout(jDialogModificarLayout);
+        jDialogModificarLayout.setHorizontalGroup(
+            jDialogModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogModificarLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jDialogModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jDialogModificarLayout.createSequentialGroup()
+                            .addComponent(jLabelApellidosM)
+                            .addGap(26, 26, 26)
+                            .addComponent(jTextFieldApellidosM, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jDialogModificarLayout.createSequentialGroup()
+                            .addComponent(jLabelNombreM)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldNombreM, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jDialogModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jDialogModificarLayout.createSequentialGroup()
+                            .addComponent(jButtonLimpiarM)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonCancelarM)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonAceptarM))
+                        .addGroup(jDialogModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jDialogModificarLayout.createSequentialGroup()
+                                .addComponent(jLabelEdadM)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldEdadM, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDialogModificarLayout.createSequentialGroup()
+                                .addComponent(jLabelDireccionM)
+                                .addGap(26, 26, 26)
+                                .addComponent(jTextFieldDireccionM, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDialogModificarLayout.createSequentialGroup()
+                                .addComponent(jLabelEmailM)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldEmailM, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jDialogModificarLayout.setVerticalGroup(
+            jDialogModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogModificarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNombreM)
+                    .addComponent(jTextFieldNombreM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelApellidosM)
+                    .addComponent(jTextFieldApellidosM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDireccionM)
+                    .addComponent(jTextFieldDireccionM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEdadM)
+                    .addComponent(jTextFieldEdadM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEmailM)
+                    .addComponent(jTextFieldEmailM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jDialogModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAceptarM)
+                    .addComponent(jButtonLimpiarM)
+                    .addComponent(jButtonCancelarM))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jFramePersonaFile.setTitle("Personas Base Datos");
+        jFramePersonaFile.setLocation(new java.awt.Point(350, 180));
+        jFramePersonaFile.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+
+        jTablePersonaFile.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTablePersonaFile.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nombre", "Apellidos", "Dirección", "Edad", "Email"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPaneTableFile.setViewportView(jTablePersonaFile);
+        jTablePersonaFile.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        jMenuFilePersonaFile.setText("File");
+
+        jMenuItemInsertarFile.setText("Insertar");
+        jMenuItemInsertarFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemInsertarFileActionPerformed(evt);
+            }
+        });
+        jMenuFilePersonaFile.add(jMenuItemInsertarFile);
+
+        jMenuItemConsultarFile.setText("Consultar");
+        jMenuItemConsultarFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConsultarFileActionPerformed(evt);
+            }
+        });
+        jMenuFilePersonaFile.add(jMenuItemConsultarFile);
+
+        jMenuItemConsultarTodosFile.setText("Consultar Todos");
+        jMenuItemConsultarTodosFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConsultarTodosFileActionPerformed(evt);
+            }
+        });
+        jMenuFilePersonaFile.add(jMenuItemConsultarTodosFile);
+
+        jMenuItemModificarFile.setText("Modificar");
+        jMenuItemModificarFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemModificarFileActionPerformed(evt);
+            }
+        });
+        jMenuFilePersonaFile.add(jMenuItemModificarFile);
+
+        jMenuItemEliminarFile.setText("Eliminar");
+        jMenuItemEliminarFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEliminarFileActionPerformed(evt);
+            }
+        });
+        jMenuFilePersonaFile.add(jMenuItemEliminarFile);
+        jMenuFilePersonaFile.add(jSeparatorExitFile);
+
+        jMenuItemSalirFile.setText("Salir");
+        jMenuItemSalirFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSalirFileActionPerformed(evt);
+            }
+        });
+        jMenuFilePersonaFile.add(jMenuItemSalirFile);
+
+        jMenuBarPersonaFile.add(jMenuFilePersonaFile);
+
+        jFramePersonaFile.setJMenuBar(jMenuBarPersonaFile);
+
+        javax.swing.GroupLayout jFramePersonaFileLayout = new javax.swing.GroupLayout(jFramePersonaFile.getContentPane());
+        jFramePersonaFile.getContentPane().setLayout(jFramePersonaFileLayout);
+        jFramePersonaFileLayout.setHorizontalGroup(
+            jFramePersonaFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFramePersonaFileLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPaneTableFile, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jFramePersonaFileLayout.setVerticalGroup(
+            jFramePersonaFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFramePersonaFileLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPaneTableFile, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jDialogInsertarFile.setTitle("Insertar Persona");
+        jDialogInsertarFile.setLocation(new java.awt.Point(500, 200));
+
+        jLabelNombreFile.setText("Nombre:");
+
+        jLabelApellidosFile.setText("Apellidos:");
+
+        jLabelDireccionFile.setText("Dirección:");
+
+        jLabelEdadFile.setText("Edad:");
+
+        jLabelEmailFile.setText("Email:");
+
+        jButtonAceptarFile.setText("Aceptar");
+        jButtonAceptarFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarFileActionPerformed(evt);
+            }
+        });
+
+        jButtonLimpiarFile.setText("Limpiar");
+        jButtonLimpiarFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarFileActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelarFile.setText("Cancelar");
+        jButtonCancelarFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarFileActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogInsertarFileLayout = new javax.swing.GroupLayout(jDialogInsertarFile.getContentPane());
+        jDialogInsertarFile.getContentPane().setLayout(jDialogInsertarFileLayout);
+        jDialogInsertarFileLayout.setHorizontalGroup(
+            jDialogInsertarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogInsertarFileLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jDialogInsertarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogInsertarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jDialogInsertarFileLayout.createSequentialGroup()
+                            .addComponent(jLabelApellidosFile)
+                            .addGap(26, 26, 26)
+                            .addComponent(jTextFieldApellidosFile, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jDialogInsertarFileLayout.createSequentialGroup()
+                            .addComponent(jLabelNombreFile)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldNombreFile, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jDialogInsertarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jDialogInsertarFileLayout.createSequentialGroup()
+                            .addComponent(jButtonLimpiarFile)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonCancelarFile)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonAceptarFile))
+                        .addGroup(jDialogInsertarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jDialogInsertarFileLayout.createSequentialGroup()
+                                .addComponent(jLabelEdadFile)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldEdadFile, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDialogInsertarFileLayout.createSequentialGroup()
+                                .addComponent(jLabelDireccionFile)
+                                .addGap(26, 26, 26)
+                                .addComponent(jTextFieldDireccionFile, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDialogInsertarFileLayout.createSequentialGroup()
+                                .addComponent(jLabelEmailFile)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldEmailFile, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jDialogInsertarFileLayout.setVerticalGroup(
+            jDialogInsertarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogInsertarFileLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogInsertarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNombreFile)
+                    .addComponent(jTextFieldNombreFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogInsertarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelApellidosFile)
+                    .addComponent(jTextFieldApellidosFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogInsertarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDireccionFile)
+                    .addComponent(jTextFieldDireccionFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogInsertarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEdadFile)
+                    .addComponent(jTextFieldEdadFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogInsertarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEmailFile)
+                    .addComponent(jTextFieldEmailFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jDialogInsertarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAceptarFile)
+                    .addComponent(jButtonLimpiarFile)
+                    .addComponent(jButtonCancelarFile))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jDialogModificarFile.setTitle("Modificar Persona");
+        jDialogModificarFile.setLocation(new java.awt.Point(500, 200));
+
+        jLabelNombreMFile.setText("Nombre:");
+
+        jLabelApellidosMFile.setText("Apellidos:");
+
+        jLabelDireccionMFile.setText("Dirección:");
+
+        jLabelEdadMFile.setText("Edad:");
+
+        jLabelEmailMFile.setText("Email:");
+
+        jButtonAceptarMFile.setText("Aceptar");
+        jButtonAceptarMFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarMFileActionPerformed(evt);
+            }
+        });
+
+        jButtonLimpiarMFile.setText("Limpiar");
+        jButtonLimpiarMFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarMFileActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelarMFile.setText("Cancelar");
+        jButtonCancelarMFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarMFileActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogModificarFileLayout = new javax.swing.GroupLayout(jDialogModificarFile.getContentPane());
+        jDialogModificarFile.getContentPane().setLayout(jDialogModificarFileLayout);
+        jDialogModificarFileLayout.setHorizontalGroup(
+            jDialogModificarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogModificarFileLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jDialogModificarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogModificarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jDialogModificarFileLayout.createSequentialGroup()
+                            .addComponent(jLabelApellidosMFile)
+                            .addGap(26, 26, 26)
+                            .addComponent(jTextFieldApellidosMFile, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jDialogModificarFileLayout.createSequentialGroup()
+                            .addComponent(jLabelNombreMFile)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldNombreMFile, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jDialogModificarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jDialogModificarFileLayout.createSequentialGroup()
+                            .addComponent(jButtonLimpiarMFile)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonCancelarMFile)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonAceptarMFile))
+                        .addGroup(jDialogModificarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jDialogModificarFileLayout.createSequentialGroup()
+                                .addComponent(jLabelEdadMFile)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldEdadMFile, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDialogModificarFileLayout.createSequentialGroup()
+                                .addComponent(jLabelDireccionMFile)
+                                .addGap(26, 26, 26)
+                                .addComponent(jTextFieldDireccionMFile, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDialogModificarFileLayout.createSequentialGroup()
+                                .addComponent(jLabelEmailMFile)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldEmailMFile, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jDialogModificarFileLayout.setVerticalGroup(
+            jDialogModificarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogModificarFileLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogModificarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNombreMFile)
+                    .addComponent(jTextFieldNombreMFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogModificarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelApellidosMFile)
+                    .addComponent(jTextFieldApellidosMFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogModificarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDireccionMFile)
+                    .addComponent(jTextFieldDireccionMFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogModificarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEdadMFile)
+                    .addComponent(jTextFieldEdadMFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogModificarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEmailMFile)
+                    .addComponent(jTextFieldEmailMFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jDialogModificarFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAceptarMFile)
+                    .addComponent(jButtonLimpiarMFile)
+                    .addComponent(jButtonCancelarMFile))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Personas");
+        setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setName("jFrameMain"); // NOI18N
         setType(java.awt.Window.Type.UTILITY);
@@ -306,26 +783,25 @@ public class MainPersonaGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 954, Short.MAX_VALUE)
+            .addGap(0, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+            .addGap(0, 579, Short.MAX_VALUE)
         );
 
-        personaDao = new PersonaDaoImpl("jdbc:mysql://localhost:3306/personas", "root", "root");
-        
         getAccessibleContext().setAccessibleDescription("");
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>                        
 
     private void jMenuItemFileActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        //JOptionPane.showMessageDialog(this, "Menu File ");
+        jFramePersonaFile.setSize(700, 450);
+        jFramePersonaFile.setVisible(true);
     }                                             
 
     private void jMenuItemBDActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        //this.add(jFramePersona);
         jFramePersona.setSize(700, 450);
         jFramePersona.setVisible(true);
     }                                           
@@ -335,11 +811,7 @@ public class MainPersonaGUI extends javax.swing.JFrame {
     }                                              
 
     private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        jTextFieldNombre.setText("");
-        jTextFieldApellidos.setText("");
-        jTextFieldDireccion.setText("");
-        jTextFieldEdad.setText("");
-        jTextFieldEmail.setText("");
+        cleanJTexFields(0);
     }                                              
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {                                                
@@ -347,35 +819,288 @@ public class MainPersonaGUI extends javax.swing.JFrame {
     }                                               
 
     private void jMenuItemInsertarActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        jDialogInsertar.setSize(340,300);
+        cleanJTexFields(0);
+        jDialogInsertar.setSize(340, 300);
         jDialogInsertar.setVisible(true);
     }                                                 
 
     private void jMenuItemConsultarActionPerformed(java.awt.event.ActionEvent evt) {                                                   
         int id = Integer.valueOf(JOptionPane.showInputDialog(this, "Insertar el Id de persona:", "Consultar Persona", JOptionPane.QUESTION_MESSAGE));
+        persona = personaDao.consultarPersona(new Persona(id, "", "", "", 0, ""));
+        if (persona != null) {
+            List<Persona> personas = new ArrayList<Persona>();
+            personas.add(persona);
+            loadJTablePersona(personas);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "La persona indicada no existe", "Consulta Persona", JOptionPane.INFORMATION_MESSAGE);
+        }
     }                                                  
 
     private void jMenuItemConsultarTodosActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        Object cabecera [] = new Object[]{"Id", "Nombre", "Apellidos", "Dirección", "Edad", "Email"};        
-        DefaultTableModel model = new DefaultTableModel(cabecera, 0);    
         List<Persona> personas = personaDao.consultarPersonas();
-        for (Persona persona : personas) {
-        	model.addRow(new Object[]{persona.getId(),persona.getNombre(),persona.getApellidos(),persona.getDireccion(),persona.getEdad(),persona.getEmail()});	
-		}        
-        jTablePersona.setModel(model);
+        loadJTablePersona(personas);
     }                                                       
 
     private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {                                               
-       jFramePersona.setVisible(false);
+        jFramePersona.setVisible(false);
+        jFramePersona.dispose();
     }                                              
 
     private void jMenuItemModificarActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-       int id = Integer.valueOf(JOptionPane.showInputDialog(this, "Insertar el Id de persona:", "Modificar Persona", JOptionPane.QUESTION_MESSAGE));
+        int id = Integer.valueOf(JOptionPane.showInputDialog(this, "Insertar el Id de persona:", "Modificar Persona", JOptionPane.QUESTION_MESSAGE));
+        persona = personaDao.consultarPersona(new Persona(id, "", "", "", 0, ""));
+        if (persona != null) {
+            jTextFieldNombreM.setText(persona.getNombre());
+            jTextFieldApellidosM.setText(persona.getApellidos());
+            jTextFieldDireccionM.setText(persona.getDireccion());
+            jTextFieldEdadM.setText(String.valueOf(persona.getEdad()));
+            jTextFieldEmailM.setText(persona.getEmail());
+            jDialogModificar.setSize(340, 300);
+            jDialogModificar.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "La persona indicada no existe", "Consulta Persona", JOptionPane.INFORMATION_MESSAGE);
+        }
     }                                                  
 
     private void jMenuItemEliminarActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         int id = Integer.valueOf(JOptionPane.showInputDialog(this, "Insertar el Id de persona:", "Eliminar Persona", JOptionPane.QUESTION_MESSAGE));
+        persona = personaDao.consultarPersona(new Persona(id, "", "", "", 0, ""));
+
+        if (persona != null) {
+            int opc = JOptionPane.showInternalConfirmDialog(rootPane, "Desea eliminar a la persona?\n" + persona.toString(), "Eliminar Persona", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (opc == 0) {
+                if (personaDao.eliminarPersona(persona)) {
+                    JOptionPane.showMessageDialog(rootPane, "Se ha eliminado la persona correctamente", "Eliminar Persona", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "La persona indicada no existe", "Consulta Persona", JOptionPane.INFORMATION_MESSAGE);
+        }
     }                                                 
+
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        String nombre = jTextFieldNombre.getText();
+        String apellidos = jTextFieldApellidos.getText();
+        String direccion = jTextFieldDireccion.getText();
+        Integer edad = 0;
+        String email = jTextFieldEmail.getText();
+        try {
+            edad = Integer.valueOf(jTextFieldEdad.getText());
+            if (nombre.equals("") || apellidos.equals("") || direccion.equals("") || (edad == 0) || email.equals("")) {
+                JOptionPane.showMessageDialog(this, "No se puede insertar una persona con valores vacios", "Insertar Persona", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (personaDao.insertarPersona(new Persona(nombre, apellidos, direccion, edad, email))) {
+                    JOptionPane.showMessageDialog(rootPane, "La persona se ha insertado correctamente", "Personas", JOptionPane.INFORMATION_MESSAGE);
+                    jDialogInsertar.setVisible(false);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "El valor indicado en la edad debe ser numerico");
+        }
+    }                                              
+
+    private void jButtonAceptarMActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        String nombre = jTextFieldNombreM.getText();
+        String apellidos = jTextFieldApellidosM.getText();
+        String direccion = jTextFieldDireccionM.getText();
+        Integer edad = 0;
+        String email = jTextFieldEmailM.getText();
+        try {
+            edad = Integer.valueOf(jTextFieldEdadM.getText());
+            if (nombre.equals("") || apellidos.equals("") || direccion.equals("") || (edad == 0) || email.equals("")) {
+                JOptionPane.showMessageDialog(this, "No se puede insertar una persona con valores vacios", "Insertar Persona", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (personaDao.actualizarPersona(persona, new Persona(nombre, apellidos, direccion, edad, email))) {
+                    JOptionPane.showMessageDialog(rootPane, "La persona se ha modificado correctamente", "Modificacion Persona", JOptionPane.INFORMATION_MESSAGE);
+                    jDialogModificar.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "No se ha modificado la persona", "Modificacion Persona", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "El valor indicado en la edad debe ser numerico");
+        }
+    }                                               
+
+    private void jButtonLimpiarMActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        cleanJTexFields(1);
+    }                                               
+
+    private void jButtonCancelarMActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        jDialogModificar.setVisible(false);
+    }                                                
+
+    private void jMenuItemInsertarFileActionPerformed(java.awt.event.ActionEvent evt) {                                                      
+        cleanJTexFields(2);
+        jDialogInsertarFile.setSize(340, 300);
+        jDialogInsertarFile.setVisible(true);
+    }                                                     
+
+    private void jMenuItemConsultarFileActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+        int id = Integer.valueOf(JOptionPane.showInputDialog(this, "Insertar el Id de persona:", "Consultar Persona", JOptionPane.QUESTION_MESSAGE));
+        persona = personaFileDao.consultarPersona(new Persona(id, "", "", "", 0, ""));
+        if (persona != null) {
+            List<Persona> personas = new ArrayList<Persona>();
+            personas.add(persona);
+            loadJTablePersonaFile(personas);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "La persona indicada no existe", "Consulta Persona", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }                                                      
+
+    private void jMenuItemConsultarTodosFileActionPerformed(java.awt.event.ActionEvent evt) {                                                            
+        List<Persona> personas = personaFileDao.consultarPersonas();
+        loadJTablePersonaFile(personas);
+    }                                                           
+
+    private void jMenuItemModificarFileActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+        int id = Integer.valueOf(JOptionPane.showInputDialog(this, "Insertar el Id de persona:", "Modificar Persona", JOptionPane.QUESTION_MESSAGE));
+        persona = personaFileDao.consultarPersona(new Persona(id, "", "", "", 0, ""));
+        if (persona != null) {
+            jTextFieldNombreMFile.setText(persona.getNombre());
+            jTextFieldApellidosMFile.setText(persona.getApellidos());
+            jTextFieldDireccionMFile.setText(persona.getDireccion());
+            jTextFieldEdadMFile.setText(String.valueOf(persona.getEdad()));
+            jTextFieldEmailMFile.setText(persona.getEmail());
+            jDialogModificarFile.setSize(340, 300);
+            jDialogModificarFile.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "La persona indicada no existe", "Consulta Persona", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }                                                      
+
+    private void jMenuItemEliminarFileActionPerformed(java.awt.event.ActionEvent evt) {                                                      
+        int id = Integer.valueOf(JOptionPane.showInputDialog(this, "Insertar el Id de persona:", "Eliminar Persona", JOptionPane.QUESTION_MESSAGE));
+        persona = personaFileDao.consultarPersona(new Persona(id, "", "", "", 0, ""));
+
+        if (persona != null) {
+            int opc = JOptionPane.showInternalConfirmDialog(rootPane, "Desea eliminar a la persona?\n" + persona.toString(), "Eliminar Persona", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (opc == 0) {
+                if (personaFileDao.eliminarPersona(persona)) {
+                    JOptionPane.showMessageDialog(rootPane, "Se ha eliminado la persona correctamente", "Eliminar Persona", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "La persona indicada no existe", "Consulta Persona", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }                                                     
+
+    private void jMenuItemSalirFileActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        jFramePersonaFile.setVisible(false);
+        jFramePersonaFile.dispose();
+    }                                                  
+
+    private void jButtonAceptarFileActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        String nombre = jTextFieldNombreFile.getText();
+        String apellidos = jTextFieldApellidosFile.getText();
+        String direccion = jTextFieldDireccionFile.getText();
+        Integer edad = 0;
+        String email = jTextFieldEmailFile.getText();
+        try {
+            edad = Integer.valueOf(jTextFieldEdadFile.getText());
+            if (nombre.equals("") || apellidos.equals("") || direccion.equals("") || (edad == 0) || email.equals("")) {
+                JOptionPane.showMessageDialog(this, "No se puede insertar una persona con valores vacios", "Insertar Persona", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (personaFileDao.insertarPersona(new Persona(PersonaFileDao.personas.size() + 1, nombre, apellidos, direccion, edad, email))) {
+                    JOptionPane.showMessageDialog(rootPane, "La persona se ha insertado correctamente", "Personas", JOptionPane.INFORMATION_MESSAGE);
+                    jDialogInsertarFile.setVisible(false);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "El valor indicado en la edad debe ser numerico");
+        }
+    }                                                  
+
+    private void jButtonLimpiarFileActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        cleanJTexFields(2);
+    }                                                  
+
+    private void jButtonCancelarFileActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+        jDialogInsertarFile.setVisible(false);
+    }                                                   
+
+    private void jButtonAceptarMFileActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+        String nombre = jTextFieldNombreMFile.getText();
+        String apellidos = jTextFieldApellidosMFile.getText();
+        String direccion = jTextFieldDireccionMFile.getText();
+        Integer edad = 0;
+        String email = jTextFieldEmailMFile.getText();
+        try {
+            edad = Integer.valueOf(jTextFieldEdadMFile.getText());
+            if (nombre.equals("") || apellidos.equals("") || direccion.equals("") || (edad == 0) || email.equals("")) {
+                JOptionPane.showMessageDialog(this, "No se puede insertar una persona con valores vacios", "Insertar Persona", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (personaFileDao.actualizarPersona(persona, new Persona(nombre, apellidos, direccion, edad, email))) {
+                    JOptionPane.showMessageDialog(rootPane, "La persona se ha modificado correctamente", "Modificacion Persona", JOptionPane.INFORMATION_MESSAGE);
+                    jDialogModificarFile.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "No se ha modificado la persona", "Modificacion Persona", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "El valor indicado en la edad debe ser numerico");
+        }
+    }                                                   
+
+    private void jButtonLimpiarMFileActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+        cleanJTexFields(3);
+    }                                                   
+
+    private void jButtonCancelarMFileActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+        jDialogModificarFile.setVisible(false);
+    }                                                    
+
+    private void loadJTablePersona(List<Persona> personas) {
+        Object cabecera[] = new Object[]{"Id", "Nombre", "Apellidos", "Dirección", "Edad", "Email"};
+        DefaultTableModel model = new DefaultTableModel(cabecera, 0);
+        for (Persona persona : personas) {
+            model.addRow(new Object[]{persona.getId(), persona.getNombre(), persona.getApellidos(), persona.getDireccion(), persona.getEdad(), persona.getEmail()});
+        }
+        jTablePersona.setModel(model);
+    }
+
+    private void loadJTablePersonaFile(List<Persona> personas) {
+        Object cabecera[] = new Object[]{"Id", "Nombre", "Apellidos", "Dirección", "Edad", "Email"};
+        DefaultTableModel model = new DefaultTableModel(cabecera, 0);
+        for (Persona persona : personas) {
+            model.addRow(new Object[]{persona.getId(), persona.getNombre(), persona.getApellidos(), persona.getDireccion(), persona.getEdad(), persona.getEmail()});
+        }
+        jTablePersonaFile.setModel(model);
+    }
+
+    private void cleanJTexFields(int opc) {
+        switch (opc) {
+            case 0:
+                jTextFieldNombre.setText("");
+                jTextFieldApellidos.setText("");
+                jTextFieldDireccion.setText("");
+                jTextFieldEdad.setText("");
+                jTextFieldEmail.setText("");
+                break;
+            case 1:
+                jTextFieldNombreM.setText("");
+                jTextFieldApellidosM.setText("");
+                jTextFieldDireccionM.setText("");
+                jTextFieldEdadM.setText("");
+                jTextFieldEmailM.setText("");
+                break;
+            case 2:
+                jTextFieldNombreFile.setText("");
+                jTextFieldApellidosFile.setText("");
+                jTextFieldDireccionFile.setText("");
+                jTextFieldEdadFile.setText("");
+                jTextFieldEmailFile.setText("");
+                break;
+            case 3:
+                jTextFieldNombreMFile.setText("");
+                jTextFieldApellidosMFile.setText("");
+                jTextFieldDireccionMFile.setText("");
+                jTextFieldEdadMFile.setText("");
+                jTextFieldEmailMFile.setText("");
+                break;
+
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -412,40 +1137,95 @@ public class MainPersonaGUI extends javax.swing.JFrame {
             }
         });
     }
-
+    private Persona persona;
     private PersonaDao personaDao;
-    
+    private PersonaFileDao personaFileDao;
+
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButtonAceptar;
+    private javax.swing.JButton jButtonAceptarFile;
+    private javax.swing.JButton jButtonAceptarM;
+    private javax.swing.JButton jButtonAceptarMFile;
     private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonCancelarFile;
+    private javax.swing.JButton jButtonCancelarM;
+    private javax.swing.JButton jButtonCancelarMFile;
     private javax.swing.JButton jButtonLimpiar;
+    private javax.swing.JButton jButtonLimpiarFile;
+    private javax.swing.JButton jButtonLimpiarM;
+    private javax.swing.JButton jButtonLimpiarMFile;
     private javax.swing.JDialog jDialogInsertar;
+    private javax.swing.JDialog jDialogInsertarFile;
+    private javax.swing.JDialog jDialogModificar;
+    private javax.swing.JDialog jDialogModificarFile;
     private javax.swing.JFrame jFramePersona;
+    private javax.swing.JFrame jFramePersonaFile;
     private javax.swing.JLabel jLabelApellidos;
+    private javax.swing.JLabel jLabelApellidosFile;
+    private javax.swing.JLabel jLabelApellidosM;
+    private javax.swing.JLabel jLabelApellidosMFile;
     private javax.swing.JLabel jLabelDireccion;
+    private javax.swing.JLabel jLabelDireccionFile;
+    private javax.swing.JLabel jLabelDireccionM;
+    private javax.swing.JLabel jLabelDireccionMFile;
     private javax.swing.JLabel jLabelEdad;
+    private javax.swing.JLabel jLabelEdadFile;
+    private javax.swing.JLabel jLabelEdadM;
+    private javax.swing.JLabel jLabelEdadMFile;
     private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelEmailFile;
+    private javax.swing.JLabel jLabelEmailM;
+    private javax.swing.JLabel jLabelEmailMFile;
     private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelNombreFile;
+    private javax.swing.JLabel jLabelNombreM;
+    private javax.swing.JLabel jLabelNombreMFile;
     private javax.swing.JMenuBar jMenuBarMain;
     private javax.swing.JMenuBar jMenuBarPersona;
+    private javax.swing.JMenuBar jMenuBarPersonaFile;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuFilePersona;
+    private javax.swing.JMenu jMenuFilePersonaFile;
     private javax.swing.JMenuItem jMenuItemBD;
     private javax.swing.JMenuItem jMenuItemClose;
     private javax.swing.JMenuItem jMenuItemConsultar;
+    private javax.swing.JMenuItem jMenuItemConsultarFile;
     private javax.swing.JMenuItem jMenuItemConsultarTodos;
+    private javax.swing.JMenuItem jMenuItemConsultarTodosFile;
     private javax.swing.JMenuItem jMenuItemEliminar;
+    private javax.swing.JMenuItem jMenuItemEliminarFile;
     private javax.swing.JMenuItem jMenuItemFile;
     private javax.swing.JMenuItem jMenuItemInsertar;
+    private javax.swing.JMenuItem jMenuItemInsertarFile;
     private javax.swing.JMenuItem jMenuItemModificar;
+    private javax.swing.JMenuItem jMenuItemModificarFile;
     private javax.swing.JMenuItem jMenuItemSalir;
+    private javax.swing.JMenuItem jMenuItemSalirFile;
     private javax.swing.JScrollPane jScrollPaneTable;
+    private javax.swing.JScrollPane jScrollPaneTableFile;
     private javax.swing.JPopupMenu.Separator jSeparatorExit;
+    private javax.swing.JPopupMenu.Separator jSeparatorExitFile;
     private javax.swing.JTable jTablePersona;
+    private javax.swing.JTable jTablePersonaFile;
     private javax.swing.JTextField jTextFieldApellidos;
+    private javax.swing.JTextField jTextFieldApellidosFile;
+    private javax.swing.JTextField jTextFieldApellidosM;
+    private javax.swing.JTextField jTextFieldApellidosMFile;
     private javax.swing.JTextField jTextFieldDireccion;
+    private javax.swing.JTextField jTextFieldDireccionFile;
+    private javax.swing.JTextField jTextFieldDireccionM;
+    private javax.swing.JTextField jTextFieldDireccionMFile;
     private javax.swing.JTextField jTextFieldEdad;
+    private javax.swing.JTextField jTextFieldEdadFile;
+    private javax.swing.JTextField jTextFieldEdadM;
+    private javax.swing.JTextField jTextFieldEdadMFile;
     private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JTextField jTextFieldEmailFile;
+    private javax.swing.JTextField jTextFieldEmailM;
+    private javax.swing.JTextField jTextFieldEmailMFile;
     private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldNombreFile;
+    private javax.swing.JTextField jTextFieldNombreM;
+    private javax.swing.JTextField jTextFieldNombreMFile;
     // End of variables declaration                   
 }
