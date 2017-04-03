@@ -18,12 +18,20 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ControllerServlet</servlet-name>
+		<url-pattern>/consultarModificarServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ControllerServlet</servlet-name>
+		<url-pattern>/consultarEliminarServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ControllerServlet</servlet-name>
 		<url-pattern>/modificarServlet</url-pattern>
-	</servlet-mapping>	
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ControllerServlet</servlet-name>
 		<url-pattern>/eliminarServlet</url-pattern>
-	</servlet-mapping>	
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
