@@ -1,5 +1,8 @@
 package com.agsnasoft.java;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,7 +17,15 @@ public class PersonaBaseDatosMain {
 	private PersonaDao personaDao;
 
 	public PersonaBaseDatosMain(String url, String usr, String pwd) {
-		personaDao = new PersonaDaoImpl(url, usr, pwd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/personas", "root", "root");
+			personaDao = new PersonaDaoImpl(connection);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 	}
 
 	public static void main(String[] args) {
@@ -231,6 +242,5 @@ public class PersonaBaseDatosMain {
 		} catch (Exception e) {
 			System.err.println("Se ha producido una excepcion: " + e.getLocalizedMessage());
 		}
-	}
-
+	}	
 }

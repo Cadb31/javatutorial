@@ -1,7 +1,6 @@
 package com.agsnasoft.java.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,12 +13,8 @@ public class PersonaDaoImpl implements PersonaDao {
 
 	private Connection connection;
 
-	public PersonaDaoImpl(String url, String usr, String pwd) {
-		try {
-			this.connection = DriverManager.getConnection(url, usr, pwd);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public PersonaDaoImpl(Connection connection) {
+		this.connection = connection;
 	}
 
 	@Override
