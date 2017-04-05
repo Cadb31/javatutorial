@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+	<title>Insertar Persona</title>
+</head>
+<body>
+	<h:form id="insertarPersona">
+		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+			<h:outputText value="Personas Insertar" />
+			<h:column />
+			<h:outputLabel value="Nueva Persona" />
+			<h:column />
+			<h:outputLabel value="Nombre:" />
+			<h:inputText id="nombre" maxlength="50" value="#{persona.nombre}" />
+			<h:outputLabel value="Apellidos:" />
+			<h:inputText id="apellidos" maxlength="50"
+				value="#{persona.apellidos}" />
+			<h:outputLabel value="Direcci&oacute;n:" />
+			<h:inputText id="direccion" maxlength="50"
+				value="#{persona.direccion}" />
+			<h:outputLabel value="Edad:" />
+			<h:inputText id="edad" maxlength="3" value="#{persona.edad}" />
+			<h:outputLabel value="Email:" />
+			<h:inputText id="email" maxlength="50" value="#{persona.email}" />
+			<h:commandButton value="Cancelar" />
+			<h:commandButton value="Aceptar" action="#{controllerManageBean.insertarPersona}" />
+		</h:panelGrid>
+	</h:form>
+	<p:link outcome="Index" value="Regreso a Inicio" />
+</body>
+</html>

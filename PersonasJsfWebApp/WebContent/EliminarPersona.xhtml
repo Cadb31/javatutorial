@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+<title>Eliminar Persona</title>
+</head>
+<body>
+	<h:form id="eliminarPersona">
+		<table>
+			<thead>
+				<tr>
+					<th colspan="2">Personas Eliminar</th>
+				</tr>
+				<tr>
+					<th colspan="2"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="2">Eliminar Persona:</td>
+				</tr>
+				<tr>
+					<td><label>Nombre:</label></td>
+					<td><h:outputLabel value="#{controllerManageBean.persona.nombre}"/></td>
+				</tr>
+				<tr>
+					<td><label>Apellidos:</label></td>
+					<td><h:outputLabel value="#{controllerManageBean.persona.apellidos}"/></td>
+				</tr>
+				<tr>
+					<td><label>Dirección:</label></td>
+					<td><h:outputLabel value="#{controllerManageBean.persona.direccion}"/></td>
+				</tr>
+				<tr>
+					<td><label>Edad:</label></td>
+					<td><h:outputLabel value="#{controllerManageBean.persona.edad}"/></td>
+				</tr>
+				<tr>
+					<td><label>Email:</label></td>
+					<td><label><h:outputLabel value="#{controllerManageBean.persona.email}"/></label></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td><h:commandButton id="Cancelar" value="Cancelar" /></td>
+					<td><h:commandButton id="Aceptar" value="Aceptar" action="#{controllerManageBean.eliminarPersona}" /></td>
+				</tr>
+			</tfoot>
+		</table>
+	</h:form>
+	<p:link outcome="Index" value="Regreso a Inicio" />
+</body>
+</html>

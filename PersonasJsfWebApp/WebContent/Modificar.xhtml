@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+<title>Modificar Persona</title>
+</head>
+<body>
+<h:form id="modificarPersona">
+		<table>
+			<thead>
+				<tr>
+					<th colspan="3">Modificar Persona</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><label>Id Persona:</label></td>
+					<td><h:inputText value="#{controllerManageBean.idBusqueda}" /></td>
+					<td><h:commandButton value="Modificar"
+							action="#{controllerManageBean.consultarModificarPersona}" /></td>
+				</tr>					
+			</tbody>
+		</table>
+	</h:form>
+	<p:link outcome="Index" value="Regreso a Inicio" />
+</body>
+</html>
