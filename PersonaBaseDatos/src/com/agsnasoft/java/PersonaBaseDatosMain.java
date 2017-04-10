@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import org.apache.log4j.Logger;
+
 import com.agsnasoft.java.dao.PersonaDao;
 import com.agsnasoft.java.dao.PersonaDaoImpl;
 import com.agsnasoft.java.model.Persona;
@@ -15,6 +17,7 @@ import com.agsnasoft.java.model.Persona;
 public class PersonaBaseDatosMain {
 
 	private PersonaDao personaDao;
+	private static Logger logger = Logger.getLogger(PersonaBaseDatosMain.class);
 
 	public PersonaBaseDatosMain(String url, String usr, String pwd) {
 		try {
@@ -30,9 +33,10 @@ public class PersonaBaseDatosMain {
 
 	public static void main(String[] args) {
 
+		logger.info("Inicio de la aplicación");
 		PersonaBaseDatosMain pBaseDatos = new PersonaBaseDatosMain("jdbc:mysql://localhost:3306/personas", "root", "root");
 		Scanner scaner = new Scanner(System.in);
-
+		logger.info("Se evalua la opcion del usuario");
 		int opc = 0;
 		do {
 			opc = pBaseDatos.drawMenu();
@@ -40,20 +44,25 @@ public class PersonaBaseDatosMain {
 			switch (opc) {
 
 			case 1:
-				pBaseDatos.insertarPersona();
+				logger.info("Se indico la opcion: " + opc);
+				pBaseDatos.insertarPersona();				
 				//pBaseDatos.insertarPersonaConsola(scaner);
 				break;
 			case 2:
+				logger.info("Se indico la opcion: " + opc);
 				pBaseDatos.consultarPersona();
 				break;
 			case 3:
+				logger.info("Se indico la opcion: " + opc);
 				pBaseDatos.consultarPersonas();
 				break;
 			case 4:
+				logger.info("Se indico la opcion: " + opc);
 				pBaseDatos.modificarPersona();
 				//pBaseDatos.modificarPersonaConsola(scaner);
 				break;
 			case 5:				
+				logger.info("Se indico la opcion: " + opc);
 				pBaseDatos.eliminarPersona();
 				//pBaseDatos.consultarPersonas();
 				//pBaseDatos.eliminarPersonaConsola(scaner);
@@ -61,7 +70,7 @@ public class PersonaBaseDatosMain {
 			}
 
 		} while (opc != 6);
-
+		logger.info("Se termino la aplicacion");
 		scaner.close();
 		System.exit(0);
 	}
@@ -75,6 +84,7 @@ public class PersonaBaseDatosMain {
 					+ "5) Eliminar Persona\n" + "6) Salir\n"));
 
 		} catch (Exception e) {
+			logger.error("Opcion no valida: " + opc);
 			JOptionPane.showMessageDialog(null, "Opcion no valida");
 		}
 
@@ -89,6 +99,7 @@ public class PersonaBaseDatosMain {
 					+ "5) Eliminar Persona\n" + "6) Salir\n");
 			opc = Integer.valueOf(scaner.nextLine());
 		} catch (Exception e) {
+			logger.error("Opcion no valida: " + opc);
 			System.out.println("Opcion no valida");
 		}
 		return opc;

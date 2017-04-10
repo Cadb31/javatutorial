@@ -13,6 +13,10 @@ public class PersonaDaoImpl implements PersonaDao {
 
 	private Connection connection;
 
+	public PersonaDaoImpl() {
+		super();
+	}
+
 	public PersonaDaoImpl(Connection connection) {
 		this.connection = connection;
 	}
