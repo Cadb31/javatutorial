@@ -13,15 +13,25 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+// TODO: Auto-generated Javadoc
 /**
  * Unit test for simple PersonaBBDDTest.
  */
+/**
+ * @author c.diaz
+ *
+ */
+/**
+ * @author c.diaz
+ *
+ */
 public class PersonaBBDDTest extends TestCase {
 
+	/** The persona dao. */
 	private PersonaDao personaDao;
 
 	/**
-	 * Create the test case
+	 * Create the test case.
 	 *
 	 * @param testName
 	 *            name of the test case
@@ -40,49 +50,78 @@ public class PersonaBBDDTest extends TestCase {
 	}
 
 	/**
+	 * Suite.
+	 *
 	 * @return the suite of tests being tested
 	 */
 	public static Test suite() {
 		return new TestSuite(PersonaBBDDTest.class);
 	}
 
+	/**
+	 * Test consultar all.
+	 */
 	public void testConsultarAll() {
 		List<Persona> personas = personaDao.consultarPersonas();
-		if(personas != null){
+		if (personas != null) {
 			for (Persona persona : personas) {
 				System.out.println(persona.toString());
 			}
 			assertTrue(true);
-		}else{
+		} else {
 			assertFalse(true);
 		}
 	}
 
+	/**
+	 * Test consultar persona.
+	 */
 	public void testConsultarPersona() {
-		List<Persona> personas = personaDao.consultarPersona(new Persona(48, "", "", "", 0, ""));
-		if(personas != null){
+		List<Persona> personas = personaDao.consultarPersona(new Persona(49, "", "", "", 0, ""));
+		if (personas != null) {
 			for (Persona persona : personas) {
 				System.out.println(persona.toString());
 			}
 			assertTrue(true);
-		}else{
+		} else {
 			assertTrue(false);
 		}
 	}
 
-	public void testInsertarPersona(){		
-		if(personaDao.insertarPersona(new Persona("Armando", "Hoyos", "Casa N15", 35, "a.hoyos@email.com"))){
+	/**
+	 * Test insertar persona.
+	 */
+	public void testInsertarPersona() {
+		if (personaDao.insertarPersona(new Persona("Armando", "Hoyos", "Casa N15", 35, "a.hoyos@email.com"))) {
 			assertTrue(true);
-		}else{
+		} else {
 			assertTrue(false);
 		}
 	}
-	
-	public void testActualizarPersona(){
-		assertTrue(true);
+
+	/**
+	 * Test actualizar persona.
+	 */
+	public void testActualizarPersona() {
+		Persona pActual = new Persona(136, "Armando", "Hoyos", "Casa N15", 35, "a.hoyos@email.com");
+		Persona pModificada = new Persona(136, "Armando", "Hoyos", "Casa N30", 35, "a.hoyos@email.com");
+
+		if (personaDao.actualizarPersona(pActual, pModificada)) {
+			assertTrue(true);
+		} else {
+			assertTrue(false);
+		}
+
 	}
-	
-	public void testEliminarPersona(){
-		assertTrue(true);
+
+	/**
+	 * Test eliminar persona.
+	 */
+	public void testEliminarPersona() {
+		if (personaDao.eliminarPersona(new Persona(138, "", "", "", 0, ""))) {
+			assertTrue(true);
+		} else {
+			assertTrue(false);
+		}
 	}
 }
