@@ -1,4 +1,4 @@
-package com.agsnasoft.jpa;
+package com.agsnasoft.jpa.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
