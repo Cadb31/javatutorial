@@ -8,7 +8,6 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
 public class Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -21,6 +20,12 @@ public class Persona implements Serializable {
 	private String email;
 
 	public Persona() {
+
+	}
+
+	public Persona(int id) {
+		super();
+		this.id = id;
 	}
 
 	public Persona(String nombre, String apellidos, String direccion, int edad, String email) {
